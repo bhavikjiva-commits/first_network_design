@@ -1,11 +1,24 @@
-My Town Media Solutions Network Configuration Write Up
+Multi-Site Enterprise Network Architecture: Scalability & Zero-Trust Integration of My Town Media Solutions.
+
+Executive Summary:
+Designed and deployed a dual-site enterprise network (HQ and Branch) using a 3-tier hierarchical model for 99.9% availability.
+Implemented secure site-to-site connectivity via GRE Tunnels and centralized internet access using PAT (Port Address Translation).
+Enforced network-wide security through SSH management, Port Security, and Layer 3 Access Control Lists (ACLs)
 
 I'm excited to share my first Packet Tracer network design with you. This project is a culmination of many hours dedicated to research, troubleshooting, and mentor collaboration. This project has been an incredibly enriching learning experience. Although the assignment is now complete, my desire for continuous improvement in network efficiency and security remains strong. I would appreciate any insights or suggestions you have. Thank you again for viewing my work.
 
+The Problem:
+Problem: Inconsistent IP management and potential IP exhaustion.
+Solution: Engineered a precise addressing scheme using Variable Length Subnet Masking (VLSM), maximizing the efficiency of the 192.168.99.0/24 space.
+
+Technical Highlights:
+Routing: Optimized path selection using Single-Area OSPF to reduce CPU overhead while maintaining rapid convergence.
+Switching: Implemented EtherChannel (PAgP) and Rapid-PVST+ to achieve sub-second failover and eliminate loops.
+Automation/Scripting: If you used any Python for these configurations, highlight it as Infrastructure as Code (IaC).
 
 IP Addressing and Scheme
 
-Media Solutions is a small company that had certain requirements for IP addressing listed below.
+Media Solutions is a small company with specific requirements for IP addressing, as listed below.
 
 VLAN Sizing & Addressing
 • Use 192.168.99.0/24 for VLSM addressing of all VLANs
@@ -23,7 +36,7 @@ Since both the Branch and HQ office used a GRE tunnel to connect to two LAN netw
 
 Switching and STP
 
-HQ-SW1 was chosen to be the root so the first step was creating an EtherChannel between the two switches. At first, I had a few complications configuring spanning-tree over the po1 link, I then linked a trunk port and moved it to native VLAN 1. I then used the spanning-tree vlan 1-100 root primary command in global configuration to make HQ-SW1 the root. I then enabled root guard to ensure that HQ-SW1 will remain the root. I then enabled port-fast Fast Ethernet 3 and 4 as they are connected to endpoints. On HQ-SW2, I also configured the etherchannel on Fast Ethernet 1 and 2 to match SW1 configuration, made po1 a trunk port and assigned it to native vlan 1, as well as enabled portfast on Fast Ethernet 3-6 that were connected endpoints. The EtherChannel was configured to use PAgP for its configuration. I also changed spanning-tree to rapid-pvst+ to reduce downtime and increase load balancing 
+HQ-SW1 was chosen to be the root, so the first step was creating an EtherChannel between the two switches. At first, I had a few complications configuring spanning-tree over the po1 link, I then linked a trunk port and moved it to native VLAN 1. I then used the spanning-tree vlan 1-100 root primary command in global configuration to make HQ-SW1 the root. I then enabled root guard to ensure that HQ-SW1 will remain the root. I then enabled port-fast Fast Ethernet 3 and 4 as they are connected to endpoints. On HQ-SW2, I also configured the etherchannel on Fast Ethernet 1 and 2 to match SW1 configuration, made po1 a trunk port and assigned it to native vlan 1, as well as enabled portfast on Fast Ethernet 3-6 that were connected endpoints. The EtherChannel was configured to use PAgP for its configuration. I also changed spanning-tree to rapid-pvst+ to reduce downtime and increase load balancing 
 
 Nat and Internet Access
 
