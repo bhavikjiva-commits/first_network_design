@@ -1,6 +1,7 @@
 Multi-Site Enterprise Network Architecture: Scalability & Zero-Trust Integration of My Town Media Solutions.
 
 Executive Summary:
+
 Designed and deployed a dual-site enterprise network (HQ and Branch) using a 3-tier hierarchical model for 99.9% availability.
 Implemented secure site-to-site connectivity via GRE Tunnels and centralized internet access using PAT (Port Address Translation).
 Enforced network-wide security through SSH management, Port Security, and Layer 3 Access Control Lists (ACLs)
@@ -8,10 +9,12 @@ Enforced network-wide security through SSH management, Port Security, and Layer 
 I'm excited to share my first Packet Tracer network design with you. This project is a culmination of many hours dedicated to research, troubleshooting, and mentor collaboration. This project has been an incredibly enriching learning experience. Although the assignment is now complete, my desire for continuous improvement in network efficiency and security remains strong. I would appreciate any insights or suggestions you have. Thank you again for viewing my work.
 
 The Problem:
+
 Problem: Inconsistent IP management and potential IP exhaustion.
 Solution: Engineered a precise addressing scheme using Variable Length Subnet Masking (VLSM), maximizing the efficiency of the 192.168.99.0/24 space.
 
 Technical Highlights:
+
 Routing: Optimized path selection using Single-Area OSPF to reduce CPU overhead while maintaining rapid convergence.
 Switching: Implemented EtherChannel (PAgP) and Rapid-PVST+ to achieve sub-second failover and eliminate loops.
 Automation/Scripting: If you used any Python for these configurations, highlight it as Infrastructure as Code (IaC).
